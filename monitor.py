@@ -1,3 +1,6 @@
+'''
+Display new threads as they're created
+'''
 import json
 import requests
 import time
@@ -28,16 +31,16 @@ def monitor():
     threads = []
 
     while True:
-        boardCatalog = json.loads(requests.get(f"https://a.4cdn.org/{biz}/catalog.json").text)
+        boardCatalogDataText = requests.get(f"https://a.4cdn.org/{biz}/catalog.json").text
+        boardCatalogJson = json.loads(boardCatalogDataText)
         time.sleep(1)
 
-        for v in boardCatalog:
-            for i in v['threads']:
-                threads.append(i)
+        for boardPageJson in boardCatalogJson:
+            for boardThreadLink in boardPageJson['threads']:
+                threads.append(boardThreadLink)
 
-        threads.sort(key=lambda x: x['no'])
-        threads.reverse()
-
+        threads.sort(key=lambda x: x['no'], reverse=True)
+        
         if not(threads[0]['no'] in seen):
             seen.append(threads[0]['no'])
             display(threads[0])
