@@ -1,6 +1,7 @@
 from requests import get
-from json import loads
 from time import sleep
+from json import loads
+
 
 class ChanBoards:
     def __init__(self):

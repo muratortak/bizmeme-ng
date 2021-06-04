@@ -1,12 +1,13 @@
-'''
-Display new threads as they're created
-'''
+
+# Display new threads as they're created
+
 import json
 import requests
 import time
 
+
 def display(thread):
-    
+
     if "sub" in thread:
         print(thread['sub'])
         print("")
@@ -17,12 +18,13 @@ def display(thread):
         comment = comment.replace("&gt;", ">")
         comment = comment.replace("&lt;", "<")
         comment = comment.replace("<wbr>", "")
-        comment = comment.replace("<span class=\"quote\">","")
-        comment = comment.replace("</span>","")
-        comment = comment.replace("&#039;","\'")
-        
+        comment = comment.replace("<span class=\"quote\">", "")
+        comment = comment.replace("</span>", "")
+        comment = comment.replace("&#039;", "\'")
+
         print(comment)
     print("-"*80)
+
 
 def monitor():
 
@@ -31,7 +33,8 @@ def monitor():
     threads = []
 
     while True:
-        boardCatalogDataText = requests.get(f"https://a.4cdn.org/{biz}/catalog.json").text
+        boardCatalogDataText = requests.get(
+            f"https://a.4cdn.org/{biz}/catalog.json").text
         boardCatalogJson = json.loads(boardCatalogDataText)
         time.sleep(1)
 
@@ -40,7 +43,7 @@ def monitor():
                 threads.append(boardThreadLink)
 
         threads.sort(key=lambda x: x['no'], reverse=True)
-        
+
         if not(threads[0]['no'] in seen):
             seen.append(threads[0]['no'])
             display(threads[0])

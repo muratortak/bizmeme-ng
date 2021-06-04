@@ -3,10 +3,11 @@ import requests
 import json
 
 boards = {
-    "biz":"https://a.4cdn.org/biz/archive.json",
-} 
+    "biz": "https://a.4cdn.org/biz/archive.json",
+}
 
-def chanGet(url): 
+
+def chanGet(url):
     time.sleep(1)
     try:
         t = requests.get(url).text
@@ -15,8 +16,10 @@ def chanGet(url):
         return None
     return t
 
-def getArchive(board): 
+
+def getArchive(board):
     return chanGet(board)
+
 
 def getThreads(board):
 
@@ -28,16 +31,18 @@ def getThreads(board):
         print(f"https://a.4cdn.org/{board}/thread/{thread}.json")
 
         try:
-            threadData = chanGet(f"https://a.4cdn.org/{board}/thread/{thread}.json")
-            
+            threadData = chanGet(
+                f"https://a.4cdn.org/{board}/thread/{thread}.json")
+
             if len(threadData['posts']) < 10:
                 if 'sub' in threadData:
                     print(threadData['sub'])
                 print(threadData['com'])
-            
+
             threads.append(threadData)
         except:
             pass
     return threads
-    
+
+
 getThreads("biz")
