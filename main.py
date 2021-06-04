@@ -1,8 +1,6 @@
 import time
 import requests
 import json
-import sqlite3
-
 
 boards = {
     "biz":"https://a.4cdn.org/biz/archive.json",
