@@ -2,20 +2,23 @@ from requests import get
 from time import sleep
 from json import loads
 
+
 def getThreadIdsFromCatalog(board):
 
     sleep(1)
     ret = []
     try:
-        boardCatalogData = loads(get(f"https://a.4cdn.org/{board}/catalog.json").text)
+        boardCatalogData = loads(
+            get(f"https://a.4cdn.org/{board}/catalog.json").text)
     except:
         return None
-    
+
     for boardCatalogPageData in boardCatalogData:
         for thread in boardCatalogPageData['threads']:
             ret.append(thread['no'])
 
     return ret
+
 
 def getThread(board, threadId):
 
@@ -25,13 +28,14 @@ def getThread(board, threadId):
     except:
         return None
 
+
 def getCommentsFromThreadAsList(thread):
-    
+
     ret = []
-    data = thread["posts"]  
+    data = thread["posts"]
 
     for post in data:
         if "com" in post:
-            ret.append(post["com"])    
-    
+            ret.append(post["com"])
+
     return ret
