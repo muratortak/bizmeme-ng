@@ -4,7 +4,7 @@
 import json
 import requests
 import time
-
+from utils.operations import removeHTMLFromComment
 
 def display(thread):
 
@@ -12,16 +12,7 @@ def display(thread):
         print(thread['sub'])
         print("")
     if "com" in thread:
-        comment = thread['com']
-        comment = comment.replace("<br>", "\n")
-        comment = comment.replace("&quot;", "\"")
-        comment = comment.replace("&gt;", ">")
-        comment = comment.replace("&lt;", "<")
-        comment = comment.replace("<wbr>", "")
-        comment = comment.replace("<span class=\"quote\">", "")
-        comment = comment.replace("</span>", "")
-        comment = comment.replace("&#039;", "\'")
-
+        comment = removeHTMLFromComment(thread['com'])
         print(comment)
     print("-"*80)
 

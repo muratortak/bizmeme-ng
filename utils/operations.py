@@ -39,3 +39,20 @@ def getCommentsFromThreadAsList(thread):
             ret.append(post["com"])
 
     return ret
+
+def removeHTMLFromComment(c):
+    comment = c
+    comment = comment.replace("<br>", "\n")
+    comment = comment.replace("&quot;", "\"")
+    comment = comment.replace("&gt;", ">")
+    comment = comment.replace("&lt;", "<")
+    comment = comment.replace("<wbr>", "")
+    comment = comment.replace("<span class=\"quote\">","")
+    comment = comment.replace("</span>","")
+    comment = comment.replace("&#039;","\'")
+    comment = comment.replace("&amp;","&")
+    comment = comment.replace("</a>","")
+    comment = comment.replace("<a>","")
+    comment = comment.replace("\""," ")
+    comment = comment.replace(">"," ")
+    return comment
