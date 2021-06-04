@@ -1,9 +1,6 @@
 from requests import get
 from time import sleep
 from json import loads
-# go through every thread
-
-# download everything
 
 def getThreadIdsFromCatalog(board):
 

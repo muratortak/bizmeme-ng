@@ -2,22 +2,17 @@ from re import search, findall
 from utils.chandata import ChanBoards
 from utils.operations import getThreadIdsFromCatalog, getThread, getCommentsFromThreadAsList
 
-board = "pol"
+board = "biz"
 
 threadsIdList = getThreadIdsFromCatalog(board)
 if threadsIdList == None:
     exit()
 
 commentList = []
-print(f"Total threads {len(threadsIdList)}")
-
 for counter, threadId in enumerate(threadsIdList):
 
     thread = getThread(board, threadId)
     if thread != None:
-
-        # commentList += getCommentsFromThreadAsList(thread)
-
         for c in getCommentsFromThreadAsList(thread):
             comment = c
             comment = comment.replace("<br>", "\n")
@@ -38,11 +33,5 @@ for counter, threadId in enumerate(threadsIdList):
             if len(t) > 0:
                 for link in t:
                     print(link)
-
-        # print(f"O {counter}/{len(threadsIdList)}", flush=True)
-    
     else:
         pass
-        # print(f"X {counter}/{len(threadsIdList)}", flush=True)
-
-for i in commentList: print(i)
