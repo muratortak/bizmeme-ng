@@ -35,8 +35,8 @@ def getCommentsFromThreadAsList(thread):
     data = thread["posts"]
 
     for post in data:
-        if "com" in post:
-            ret.append(post["com"])
+        if "com" in post and "time" in post:
+            ret.append((post["com"],post['time']))
 
     return ret
 
