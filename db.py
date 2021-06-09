@@ -17,3 +17,4 @@ cur.execute('''
 
 def addRow(link, date, board):
     cur.execute(''' INSERT INTO chanlinks (link, date, board) values(?,?,?); ''', (link, date, board))
+    
