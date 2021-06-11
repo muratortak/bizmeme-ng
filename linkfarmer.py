@@ -4,7 +4,40 @@ from utils.chandata import ChanBoards
 from utils.operations import getThreadIdsFromCatalog, getThread, getCommentsFromThreadAsList, removeHTMLFromComment
 import db
 
-boards = ChanBoards().boardNames
+boards = ['pol',
+          'vg',
+          'v',
+          'b',
+          'biz',
+          'int',
+          'a',
+          'tv',
+          'vt',
+          'sp',
+          'trash',
+          'co',
+          'mu',
+          'tg',
+          'fit',
+          'r9k',
+          'g',
+          'x',
+          'his',
+          'adv',
+          'lit',
+          'bant',
+          'ck',
+          'o',
+          'qa',
+          'aco',
+          'mlp',
+          'vrpg',
+          'soc',
+          'm',
+          'vr',
+          's4s'
+]
+shuffle(boards)
 
 for board in boards:
 

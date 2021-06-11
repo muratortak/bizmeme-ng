@@ -1,0 +1,4 @@
+from charts.posts_over_time_in_thread import postsOverTimeInThread
+from utils.operations import calculateThreadPostRate
+
+postsOverTimeInThread(calculateThreadPostRate("sci",13259979))

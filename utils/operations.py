@@ -1,7 +1,7 @@
 from requests import get
 from time import sleep
 from json import loads
-
+from datetime import datetime
 
 def getThreadIdsFromCatalog(board):
 
@@ -56,3 +56,17 @@ def removeHTMLFromComment(c):
     comment = comment.replace("\""," ")
     comment = comment.replace(">"," ")
     return comment
+
+def calculateThreadPostRate(board, threadID):
+    ''' 
+    Take a single thread and calculate the rate posts are made to it
+    Return a list of times which are the delays between posts
+    '''
+    dates = []
+    threadPosts = getThread("g", "82017863")["posts"]
+    for post in threadPosts:
+        dates.append(datetime.utcfromtimestamp(post['time']))
+    return dates
+
+mdates = calculateThreadPostRate("g", 82023871)
+
