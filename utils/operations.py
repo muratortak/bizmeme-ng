@@ -68,5 +68,4 @@ def calculateThreadPostRate(board, threadID):
         dates.append(datetime.utcfromtimestamp(post['time']))
     return dates
 
-mdates = calculateThreadPostRate("g", 82023871)
 
