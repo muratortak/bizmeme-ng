@@ -63,7 +63,7 @@ def calculateThreadPostRate(board, threadID):
     Return a list of times which are the delays between posts
     '''
     dates = []
-    threadPosts = getThread("g", "82017863")["posts"]
+    threadPosts = getThread(board, threadID)["posts"]
     for post in threadPosts:
         dates.append(datetime.utcfromtimestamp(post['time']))
     return dates
