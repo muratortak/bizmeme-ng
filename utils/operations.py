@@ -68,4 +68,38 @@ def calculateThreadPostRate(board, threadID):
         dates.append(datetime.utcfromtimestamp(post['time']))
     return dates
 
+def getCountryFlagsAndCommentsFromThread(board, threadID):
+    
+    countryAndComments = []
+    threadPosts = getThread(board, threadID)["posts"]
+    
+    for post in threadPosts:
+        if "country" in post and "com" in post:
+            countryAndComments.append( (post['country'],post['com']))
+
+    countryAndComments.sort()    
+    
+    return countryAndComments
+
+def meanPostLengthByCountry(countryAndThreadList):
+    postLengths = {}
+
+    for data in countryAndThreadList:
+        country = data[0]
+        comment = data[1]
+
+        if not (country in postLengths.keys()):
+            postLengths[country] = (len(comment),1)
+        
+        else:
+            currentTotalCharacters = postLengths[country][0]
+            numberOfPosters = postLengths[country][1]
+            postLengths[country] = (currentTotalCharacters+len(comment), numberOfPosters+1)
+
+    ret = []
+    for data in postLengths:
+        ret.append( (data, int(postLengths[data][0]/postLengths[data][1]) ) )  
+
+    ret.sort(key=lambda x: x[1],reverse=True)
+    return ret
 

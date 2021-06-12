@@ -8,7 +8,7 @@ import datetime
 from matplotlib.colors import BoundaryNorm
 from matplotlib.ticker import MaxNLocator
 import numpy as np
-import os, sys
+
 
 def postsOverTimeInThread(timeDates):
     plt.style.use('classic')
@@ -19,3 +19,13 @@ def postsOverTimeInThread(timeDates):
     plt.plot(timeDates,posts,'o',color="k")
     plt.show()
 
+def meanPostsPerCountryFlag(data):
+    plt.style.use('classic')
+    plt.title(r'Average post length by country flag')
+    plt.ylabel(r'Mean post length')
+    plt.xlabel(r'Country')
+    x = [x[0] for x in data]
+    y = [y[1] for y in data] 
+    plt.bar(x,y)
+    plt.show()
+    
