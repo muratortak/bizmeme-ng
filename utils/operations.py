@@ -10,13 +10,15 @@ def getThreadIdsFromCatalog(board):
     try:
         boardCatalogData = loads(
             get(f"https://a.4cdn.org/{board}/catalog.json").text)
+    
     except:
         return None
 
     for boardCatalogPageData in boardCatalogData:
         for thread in boardCatalogPageData['threads']:
             ret.append(thread['no'])
-
+    
+    ret.reverse() # some boards don't have an archive leaving the last few to always be deleted
     return ret
 
 
