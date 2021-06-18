@@ -58,53 +58,56 @@ cur.execute('''
         unique_ips text,
         archived text,
         archived_on text,
-        primary key (no, md5)
+        primary key (board, no)
     )
 
 ''')
 
 def addPost(boardName: str, data: Post) -> None:
-    cur.execute(''' 
-    INSERT INTO PostData 
-    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); ''', 
-    (
-        boardName, 
-        data.no,
-        data.sticky,
-        data.closed,
-        data.now,
-        data.name,
-        data.sub,
-        data.com,
-        data.filename,
-        data.ext,
-        data.w,
-        data.h,
-        data.tn_w,
-        data.tn_h,
-        data.tim,
-        data.time,
-        data.md5,
-        data.filesize,
-        data.resto,
-        data.capcode,
-        data.semantic_url,
-        data.trip,
-        data.id,
-        data.country,
-        data.country_name,
-        data.board_flag,
-        data.flag_name,
-        data.filedeleted,
-        data.spoiler,
-        data.custom_spoiler,
-        data.replies,
-        data.bumplimit,
-        data.since4pass,
-        data.unique_ips,
-        data.archived,
-        data.archived_on
-    ))
+    try:
+        cur.execute(''' 
+        INSERT INTO PostData 
+        VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?); ''', 
+        (
+            boardName, 
+            data.no,
+            data.sticky,
+            data.closed,
+            data.now,
+            data.name,
+            data.sub,
+            data.com,
+            data.filename,
+            data.ext,
+            data.w,
+            data.h,
+            data.tn_w,
+            data.tn_h,
+            data.tim,
+            data.time,
+            data.md5,
+            data.filesize,
+            data.resto,
+            data.capcode,
+            data.semantic_url,
+            data.trip,
+            data.id,
+            data.country,
+            data.country_name,
+            data.board_flag,
+            data.flag_name,
+            data.filedeleted,
+            data.spoiler,
+            data.custom_spoiler,
+            data.replies,
+            data.bumplimit,
+            data.since4pass,
+            data.unique_ips,
+            data.archived,
+            data.archived_on
+        ))
+    except:
+        print("Error on insert")
     
 
 

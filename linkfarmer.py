@@ -1,3 +1,4 @@
+import time
 from random import shuffle, sample
 from re import search, findall
 from data import Post
@@ -38,27 +39,35 @@ boards = ['pol',
           'vr',
           's4s'
 ]
+
 shuffle(boards)
-posts = []
-for board in boards:
+
+def scrapeBoard(board: str) -> None:
 
     threadsIdList = getThreadIdsFromCatalog(board)
-    
     if not threadsIdList: exit()
     
     print(f"Beginning {board}, total threads {len(threadsIdList)}")
-    
-    commentList = []
-    for threadId in threadsIdList:
+
+    for threadIndex, threadId in enumerate(threadsIdList):
+        
+        delta = 0
+        timePast = time.time()  
+
         thread = getThread(board, threadId)
-        if thread:     
-            print("o",end="",flush=True)
+        
+        if thread:    
             for comment in getCommentsFromThreadAsList(thread):
                 db.addPost(board,Post(comment))
-        else:
-            pass
-            print("x",end="",flush=True)
-        db.con.commit()
-    print()
+        
+        delta = time.time() - timePast
+        print(board, threadIndex, "/", len(threadsIdList), delta)
+        
+    db.con.commit()
 
+
+for board in boards:
+    scrapeBoard(board)
 db.con.close()
+
+

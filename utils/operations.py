@@ -23,7 +23,7 @@ def getThreadIdsFromCatalog(board):
 def getThread(board, threadId):
 
     try:
-        sleep(1)
+        sleep(0.9)
         return loads(get(f"https://a.4cdn.org/{board}/thread/{threadId}.json").text)
     except:
         return None
